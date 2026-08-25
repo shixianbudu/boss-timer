@@ -4,6 +4,7 @@ import { BOSSES, formatCountdown, respawnMs } from '@/lib/bosses'
 import { recordKey, useKillRecords } from '@/hooks/useKillRecords'
 import { useNow } from '@/hooks/useNow'
 import BossPanel from '@/sections/BossPanel'
+import OverviewPanel from '@/sections/OverviewPanel'
 import '../App.css'
 
 /** 简易提示音（WebAudio，无需音频文件） */
@@ -62,6 +63,11 @@ export default function Home() {
     return { activeByBoss, upcoming: items.slice(0, 6) }
   }, [records, now, bossMap])
 
+  const totalActive = useMemo(
+    () => Array.from(activeByBoss.values()).reduce((sum, n) => sum + n, 0),
+    [activeByBoss],
+  )
+
   // 到点提示音：只在从 >0 跨到 <=0 的瞬间响一次
   useEffect(() => {
     if (!soundOn) return
@@ -83,6 +89,9 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="mx-auto max-w-[1600px] px-4 py-5">
+        <div className="pointer-events-none mb-2 select-none text-center text-sm tracking-[0.35em] text-white/35">
+          欢迎关注抖音：芬达
+        </div>
         <header className="mb-4 flex flex-wrap items-center gap-3">
           <h1 className="text-2xl font-bold tracking-wide">
             <span className="mr-2">⚔️</span>Boss 刷新倒计时
@@ -131,8 +140,19 @@ export default function Home() {
           </div>
         )}
 
-        <Tabs defaultValue={BOSSES[0].id}>
+        <Tabs defaultValue="overview">
           <TabsList className="mb-4 flex h-auto flex-wrap justify-start gap-1 bg-neutral-900 p-1">
+            <TabsTrigger
+              value="overview"
+              className="font-semibold text-white data-[state=active]:bg-amber-600/60 data-[state=active]:text-white"
+            >
+              <span className="mr-1">📋</span>总览
+              {totalActive > 0 && (
+                <span className="ml-1 rounded-full bg-amber-500/25 px-1.5 text-[10px] font-semibold text-amber-300">
+                  {totalActive}
+                </span>
+              )}
+            </TabsTrigger>
             {BOSSES.map((boss) => {
               const active = activeByBoss.get(boss.id) ?? 0
               return (
@@ -155,6 +175,10 @@ export default function Home() {
               )
             })}
           </TabsList>
+
+          <TabsContent value="overview">
+            <OverviewPanel records={records} now={now} onKill={recordKill} onClear={clearRecord} />
+          </TabsContent>
 
           {BOSSES.map((boss) => (
             <TabsContent key={boss.id} value={boss.id}>

@@ -8,9 +8,12 @@ interface LineCardProps {
   now: number
   onKill: () => void
   onClear: () => void
+  /** 自定义标题（总览页用），默认显示 `${line} 线` */
+  title?: string
 }
 
-function LineCardInner({ line, killAt, respawnMs, now, onKill, onClear }: LineCardProps) {
+function LineCardInner({ line, killAt, respawnMs, now, onKill, onClear, title }: LineCardProps) {
+  const label = title ?? `${line} 线`
   const recorded = killAt !== undefined
   const remaining = recorded ? killAt + respawnMs - now : 0
   const spawned = recorded && remaining <= 0
@@ -30,7 +33,7 @@ function LineCardInner({ line, killAt, respawnMs, now, onKill, onClear }: LineCa
         title="点击记录击杀时间"
       >
         <div className="flex items-baseline justify-between">
-          <span className="text-sm font-bold text-neutral-300">{line} 线</span>
+          <span className="text-sm font-bold text-neutral-300">{label}</span>
         </div>
         <div className="mt-1 text-lg font-mono font-semibold text-neutral-500">--:--</div>
         <div className="mt-0.5 text-[10px] text-neutral-500">点击记录击杀</div>
@@ -54,7 +57,7 @@ function LineCardInner({ line, killAt, respawnMs, now, onKill, onClear }: LineCa
       title="再次点击重新记录击杀时间"
     >
       <div className="flex items-baseline justify-between gap-1">
-        <span className="text-sm font-bold text-white/90">{line} 线</span>
+        <span className="truncate text-sm font-bold text-white/90">{label}</span>
         <span
           role="button"
           tabIndex={-1}
