@@ -139,7 +139,7 @@ export default function Home() {
                 <TabsTrigger
                   key={boss.id}
                   value={boss.id}
-                  className="data-[state=active]:bg-neutral-700 data-[state=active]:text-white"
+                  className="font-semibold text-white data-[state=active]:bg-neutral-700 data-[state=active]:text-white"
                 >
                   <span className="mr-1">{boss.icon}</span>
                   {boss.name}

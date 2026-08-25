@@ -10,11 +10,13 @@ export interface BossConfig {
 export const LINE_COUNT = 60
 
 export const BOSSES: BossConfig[] = [
+  { id: 'snail-king', name: '蜗牛王', respawnMinutes: 45, lines: LINE_COUNT, icon: '🐌' },
+  { id: 'tree-spirit-king', name: '树妖王', respawnMinutes: 45, lines: LINE_COUNT, icon: '🌳' },
+  { id: 'giant-crab', name: '巨居蟹', respawnMinutes: 20, lines: LINE_COUNT, icon: '🦀' },
   { id: 'mushroom-king', name: '蘑菇王', respawnMinutes: 30, lines: LINE_COUNT, icon: '🍄' },
   { id: 'zombie-mushroom-king', name: '僵尸蘑菇王', respawnMinutes: 30, lines: LINE_COUNT, icon: '🧟' },
   { id: 'faust', name: '浮士德', respawnMinutes: 30, lines: LINE_COUNT, icon: '👹' },
   { id: 'doll', name: '多尔', respawnMinutes: 30, lines: LINE_COUNT, icon: '🎭' },
-  { id: 'giant-crab', name: '巨居蟹', respawnMinutes: 20, lines: LINE_COUNT, icon: '🦀' },
   { id: 'balrog', name: '蝙蝠怪', respawnMinutes: 180, lines: LINE_COUNT, icon: '🦇' },
 ]
 
