@@ -73,3 +73,33 @@
     @apply bg-background text-foreground;
   }
 }
+/* 抖音水印：呼吸灯 + 音符摆动（抖音红青双影风格） */
+@keyframes douyin-breathe {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    text-shadow: 0 0 14px rgba(37, 244, 238, 0.75), 0 0 32px rgba(254, 44, 85, 0.55);
+    box-shadow: 0 0 18px rgba(254, 44, 85, 0.25), 0 0 18px rgba(37, 244, 238, 0.2);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.97);
+    text-shadow: 0 0 3px rgba(37, 244, 238, 0.15);
+    box-shadow: none;
+  }
+}
+
+@keyframes douyin-note-swing {
+  0%, 100% { transform: rotate(-12deg) scale(1); }
+  50% { transform: rotate(10deg) scale(1.18); }
+}
+
+.douyin-watermark {
+  animation: douyin-breathe 2.4s ease-in-out infinite;
+}
+
+.douyin-note {
+  display: inline-block;
+  animation: douyin-note-swing 1.6s ease-in-out infinite;
+  text-shadow: 2px 0 0 rgba(254, 44, 85, 0.85), -2px 0 0 rgba(37, 244, 238, 0.85);
+}

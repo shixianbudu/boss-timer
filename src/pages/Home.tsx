@@ -89,8 +89,11 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="mx-auto max-w-[1600px] px-4 py-5">
-        <div className="pointer-events-none mb-2 select-none text-center text-sm tracking-[0.35em] text-white/35">
-          欢迎关注抖音：芬达
+        <div className="pointer-events-none mb-3 flex select-none justify-center">
+          <span className="douyin-watermark inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-1.5 text-base font-bold tracking-[0.25em] text-white">
+            <span className="douyin-note text-xl leading-none">🎵</span>
+            欢迎关注抖音：芬达
+          </span>
         </div>
         <header className="mb-4 flex flex-wrap items-center gap-3">
           <h1 className="text-2xl font-bold tracking-wide">
